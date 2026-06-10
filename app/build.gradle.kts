@@ -63,7 +63,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.squareup.okhttp3:logging-interceptor:5.4.0")
     implementation("com.github.bumptech.glide:glide:5.0.7")
-    implementation(libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
     annotationProcessor("com.github.bumptech.glide:compiler:5.0.7")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
