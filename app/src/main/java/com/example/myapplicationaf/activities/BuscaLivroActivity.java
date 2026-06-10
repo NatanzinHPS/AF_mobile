@@ -147,7 +147,7 @@ public class BuscaLivroActivity extends AppCompatActivity {
         // Chamada HTTP assíncrona via Retrofit
         RetrofitClient.getInstance()
                 .getService()
-                .buscarLivros(query, MAX_RESULTADOS)
+                .buscarLivros(query, MAX_RESULTADOS, BuildConfig.GOOGLE_BOOKS_API_KEY)
                 .enqueue(new Callback<GoogleBooksResponse>() {
 
                     @Override

@@ -1,8 +1,14 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
 }
 
+val localProps = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) load(file.inputStream())
+}
 android {
     namespace = "com.example.myapplicationaf"
     compileSdk {
@@ -17,7 +23,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+        buildConfigField(
+            "String",
+            "GOOGLE_BOOKS_API_KEY",
+            "\"${localProps.getProperty("GOOGLE_BOOKS_API_KEY", "")}\""
+        )    }
 
     buildTypes {
         release {
@@ -34,6 +44,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -52,6 +63,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.squareup.okhttp3:logging-interceptor:5.4.0")
     implementation("com.github.bumptech.glide:glide:5.0.7")
+    implementation(libs.room.compiler)
     annotationProcessor("com.github.bumptech.glide:compiler:5.0.7")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

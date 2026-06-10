@@ -33,7 +33,8 @@ public interface GoogleBooksApiService {
     @GET("volumes")
     Call<GoogleBooksResponse> buscarLivros(
             @Query("q") String query,
-            @Query("maxResults") int maxResults
+            @Query("maxResults") int maxResults,
+            @Query("key") String apiKey
     );
 
     /**
